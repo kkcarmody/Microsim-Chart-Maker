@@ -7,6 +7,8 @@ from pathlib import Path
 import re
 import pickle
 
+from macro_lib import plot_ts
+
 from dicts import slice_dict
 from dicts import var_label_dict
 
