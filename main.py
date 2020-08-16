@@ -8,6 +8,10 @@ from pathlib import Path
 import re
 import pickle
 
+import macro_lib
+import bcycle_lib
+import micro_lib
+
 import getpass
 import time
 
@@ -107,13 +111,13 @@ if cache_files:
         
         print('Done caching %s' % (key))
 
-    for key in slice_dict['Categorical']:
-        dict = slice_dict['Categorical'][key]
-        sliced_dfs = micro_lib.slice_categories(micro_dfs, var = key, groups = dict['groups'], var_label_dict = var_label_dict)
+    # for key in slice_dict['Categorical']:
+    #     dict = slice_dict['Categorical'][key]
+    #     sliced_dfs = micro_lib.slice_categories(micro_dfs, var = key, groups = dict['groups'], var_label_dict = var_label_dict)
 
-        vars = [var for var in sliced_dfs['run0'].columns if key in var]
+    #     vars = [var for var in sliced_dfs['run0'].columns if key in var]
 
-        cache_file_dict['Categorical'][key] = micro_lib.cache_dict_means(sliced_dfs, vars = vars, output_path = chart_cache_path, groups = dict['groups'])
+    #     cache_file_dict['Categorical'][key] = micro_lib.cache_dict_means(sliced_dfs, vars = vars, output_path = chart_cache_path, groups = dict['groups'])
 
         print('Done caching %s' % (key))
     
