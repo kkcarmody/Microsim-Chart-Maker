@@ -29,7 +29,7 @@ output_path = Path(user_path / 'OneDrive - PennO365/Microsim Documentation/')
 chart_cache_path = Path(output_path / 'Cache/')
 
 ## Display plots as they're made?
-show_plots = False
+show_plots = True
 
 ## Microsim cache location
 if user == 'KodyC':
@@ -49,7 +49,7 @@ macro_output_path = output_path / 'Macro Charts/'
 micro_output_path = output_path / 'Micro Charts/'
 
 ## Microdata Parameters
-cache_files = False
+cache_files = True
 n_runs = 8
 run_pct = 1
 # n_runs = len(run_dirs)
@@ -104,20 +104,19 @@ if cache_files:
                         'Categorical' : {}, 
                         'Workers' : {}}
 
-
     for key in slice_dict['Simple Means']:
         dict = slice_dict['Simple Means'][key]
         cache_file_dict['Simple Means'][key] = micro_lib.cache_sliced_dfs_means(micro_dfs, var = key, groups = dict['groups'], output_path = chart_cache_path, condition_var = dict['condition_var'], condition_greater = dict['condition_greater'], condition_isin = dict['condition_isin'])
         
         print('Done caching %s' % (key))
 
-    # for key in slice_dict['Categorical']:
-    #     dict = slice_dict['Categorical'][key]
-    #     sliced_dfs = micro_lib.slice_categories(micro_dfs, var = key, groups = dict['groups'], var_label_dict = var_label_dict)
+    for key in slice_dict['Categorical']:
+        dict = slice_dict['Categorical'][key]
+        sliced_dfs = micro_lib.slice_categories(micro_dfs, var = key, groups = dict['groups'], var_label_dict = var_label_dict)
 
-    #     vars = [var for var in sliced_dfs['run0'].columns if key in var]
+        vars = [var for var in sliced_dfs['run0'].columns if key in var]
 
-    #     cache_file_dict['Categorical'][key] = micro_lib.cache_dict_means(sliced_dfs, vars = vars, output_path = chart_cache_path, groups = dict['groups'])
+        cache_file_dict['Categorical'][key] = micro_lib.cache_dict_means(sliced_dfs, vars = vars, output_path = chart_cache_path, groups = dict['groups'])
 
         print('Done caching %s' % (key))
     
